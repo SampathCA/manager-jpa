@@ -10,13 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.marakana.contacts.entities.Address;
 import com.marakana.contacts.entities.Contact;
-import com.marakana.contacts.repositories.AddressRepository;
 import com.marakana.contacts.repositories.ContactRepository;
 
 @WebServlet("/contact")
 public class ContactServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final AddressRepository addressRepository = new AddressRepository();
+	//private final AddressRepository addressRepository = new AddressRepository();
 	private final ContactRepository contactRepository = new ContactRepository();
 
 	public ContactServlet() {
@@ -34,10 +33,10 @@ public class ContactServlet extends HttpServlet {
 			// with the contact and address objects
 			long id = Long.parseLong(request.getParameter("id"));
 			Contact contact = contactRepository.find(id);
-			Address address = addressRepository.find(contact.getAddressId());
+			//Address address = contact.getAddress();
 
 			request.setAttribute("contact", contact);
-			request.setAttribute("address", address);
+			//request.setAttribute("address", address);
 
 			// dispatch either to the edit page or to the view page
 			if (request.getParameter("edit") != null) {
@@ -61,9 +60,8 @@ public class ContactServlet extends HttpServlet {
 					request.getParameter("city"),
 					request.getParameter("state"), request.getParameter("zip"));
 
-			address = addressRepository.save(address);
-			Contact contact = new Contact(request.getParameter("name"),
-					address.getId());
+			//	address = addressRepository.save(address);
+			Contact contact = new Contact(request.getParameter("name"), address);
 			contact = contactRepository.save(contact);
 			// redirect to contact view page
 			response.sendRedirect("contacts?id=" + contact.getId());
@@ -72,7 +70,7 @@ public class ContactServlet extends HttpServlet {
 			// persist
 			long id = Long.parseLong(request.getParameter("id"));
 			Contact contact = contactRepository.find(id);
-			Address address = addressRepository.find(contact.getAddressId());
+			Address address = contact.getAddress();
 
 			contact.setName(request.getParameter("name"));
 			address.setStreet(request.getParameter("street"));
@@ -80,17 +78,17 @@ public class ContactServlet extends HttpServlet {
 			address.setZip(request.getParameter("zip"));
 			address.setState(request.getParameter("state"));
 			contactRepository.save(contact);
-			addressRepository.save(address);
+			//addressRepository.save(address);
 			// redirect to contact view page
 			response.sendRedirect("contact?id=" + contact.getId());
 		} else if (request.getParameter("delete") != null) {
 			// lookup existing contact and address and delete
 			long id = Long.parseLong(request.getParameter("id"));
 			Contact contact = contactRepository.find(id);
-			Address address = addressRepository.find(contact.getAddressId());
+			//Address address = contact.getAddress();
 
 			contactRepository.delete(contact);
-			addressRepository.delete(address);
+			//addressRepository.delete(address);
 
 			// redirect to contact list page
 			response.sendRedirect("contacts");

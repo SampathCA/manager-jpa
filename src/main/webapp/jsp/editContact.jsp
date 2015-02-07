@@ -14,11 +14,13 @@
 		<ul>
 			<li>name: <input type="text" name="name" value="${contact.name}"></li>
 			<li>street: <input type="text" name="street"
-				value="${address.street}"></li>
-			<li>city: <input type="text" name="city" value="${address.city}"></li>
+				value="${contact.address.street}"></li>
+			<li>city: <input type="text" name="city"
+				value="${contact.address.city}"></li>
 			<li>state: <input type="text" name="state"
-				value="${address.state}"></li>
-			<li>zip: <input type="text" name="zip" value="${address.zip}"></li>
+				value="${contact.address.state}"></li>
+			<li>zip: <input type="text" name="zip"
+				value="${contact.address.zip}"></li>
 		</ul>
 		<input type="submit" value="save">
 	</form>

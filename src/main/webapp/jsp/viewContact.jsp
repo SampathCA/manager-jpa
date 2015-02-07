@@ -11,10 +11,10 @@
 	<h1>${contact.name}</h1>
 
 	<ul>
-		<li>${address.street}</li>
-		<li>${address.city},${address.state},${address.zip}</li>
+		<li>${contact.address.street}</li>
+		<li>${contact.address.city},${contact.address.state},${contact.address.zip}</li>
 	</ul>
-	<a href="contact?edit&id=${contact.id}">edit contact</a>
+	<a href="contact?edit&id=${contact.id}">edit contact</a> |
 	<a href="contacts">back to contact list</a>
 </body>
 </html>
