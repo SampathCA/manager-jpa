@@ -22,12 +22,9 @@ public class ContactListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		try {
-			request.setAttribute("contacts", contactRepository.findAll());
-			request.getRequestDispatcher("jsp/contactList.jsp").forward(
-					request, response);
-		} catch (SQLException e) {
-			throw new ServletException(e);
-		}
+
+		request.setAttribute("contacts", contactRepository.findAll());
+		request.getRequestDispatcher("jsp/contactList.jsp").forward(request,
+				response);
 	}
 }
