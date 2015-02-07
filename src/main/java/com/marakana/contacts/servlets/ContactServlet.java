@@ -61,10 +61,10 @@ public class ContactServlet extends HttpServlet {
 					request.getParameter("city"),
 					request.getParameter("state"), request.getParameter("zip"));
 
-			addressRepository.save(address);
+			address = addressRepository.save(address);
 			Contact contact = new Contact(request.getParameter("name"),
 					address.getId());
-			contactRepository.save(contact);
+			contact = contactRepository.save(contact);
 			// redirect to contact view page
 			response.sendRedirect("contacts?id=" + contact.getId());
 		} else if (request.getParameter("edit") != null) {
